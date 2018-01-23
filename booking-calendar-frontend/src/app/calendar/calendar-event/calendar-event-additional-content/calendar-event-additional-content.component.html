@@ -1,0 +1,122 @@
+<form [formGroup]="eventForm">
+  <div class="cal-event-title-field">
+    <mat-slide-toggle
+      formControlName="isTicketOffline"
+      color="primary"
+    >
+      Ticket sales are
+    </mat-slide-toggle>
+    <mat-form-field>
+      <mat-placeholder>Price:</mat-placeholder>
+      <input type="number" step='0.01' matInput formControlName="price">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>Door Price:</mat-placeholder>
+      <input matInput formControlName="doorPrice">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select formControlName="specialPricing" placeholder="Special Pricing">
+        <mat-option [value]="specialPrice.tid" *ngFor="let specialPrice of specialPricings">{{specialPrice.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select formControlName="genreType" placeholder="Genre Type">
+        <mat-option [value]="type.tid" *ngFor="let type of genreTypes">{{type.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select formControlName="festival" placeholder="Festivals">
+        <mat-option [value]="event.tid" *ngFor="let event of festivals">{{event.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>FB Event Link:</mat-placeholder>
+      <input matInput formControlName="fbEventLink">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>Load In / Tech Arrival Time:</mat-placeholder>
+      <input matInput formControlName="techArrival">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>Media Embed Code:</mat-placeholder>
+      <input matInput formControlName="mediaEmbedCode">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>External Link (description):</mat-placeholder>
+      <input matInput formControlName="externalLinkDescription">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>oEmbed Media Link:</mat-placeholder>
+      <input type="url" matInput formControlName="mediaLink">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>Will Call Email Recipient:</mat-placeholder>
+      <input type="email" matInput formControlName="willCallEmailRecipient">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>Number of Tickets for Sale / Commerce Stock:</mat-placeholder>
+      <input type="number" matInput formControlName="numberOfTicketsForSale">
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>Money Owed:</mat-placeholder>
+      <input matInput formControlName="moneyOwed">
+    </mat-form-field>
+    <div class="mat-stepper-horizontal-line"></div>
+    <mat-form-field>
+      <mat-placeholder>Sales Cutoff Date:</mat-placeholder>
+      <input matInput [owlDateTimeTrigger]="expirationDatePicker" formControlName="expirationDate" [owlDateTime]="expirationDatePicker">
+      <owl-date-time [pickerMode]="'popup'" #expirationDatePicker></owl-date-time>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>Live Date:</mat-placeholder>
+      <input matInput [owlDateTimeTrigger]="liveDatePicker" formControlName="liveDate" [owlDateTime]="liveDatePicker">
+      <owl-date-time [pickerMode]="'popup'" #liveDatePicker></owl-date-time>
+    </mat-form-field>
+    <div class="file-upload">
+      <div>
+        <label for="rider">
+            Load Rider...
+        </label>
+        <input type="file" id="rider" (change)="onFileChange($event)" >
+      </div>
+    </div>
+    <div class="file-upload">
+        <img *ngIf="image || eventForm.value['poster']" [src]="image || eventForm.value['poster']" class="rotated-image">
+        <div>
+          <label for="poster">
+              Load Event image (poster)...
+          </label>
+          <input type="file" id="poster" accept="image/*" (change)="onFileChange($event, true)" >
+        </div>
+    </div>
+    <mat-slide-toggle
+      formControlName="ticketOrListing"
+      color="primary"
+    >
+      Ticket or Listing
+    </mat-slide-toggle>
+    <mat-form-field>
+      <mat-chip-list #chipList>
+        <mat-chip *ngFor="let performer of eventForm.value['supportingPerformers']"
+          [selectable]="false"
+          [removable]="true"
+          (remove)="remove(performer)">
+          {{performer.value}}
+          <mat-icon matChipRemove>cancel</mat-icon>
+        </mat-chip>
+        <input placeholder="New performer..."
+                [matChipInputFor]="chipList"
+                (matChipInputTokenEnd)="add($event)"
+              />
+      </mat-chip-list>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>Description:</mat-placeholder>
+      <textarea matInput formControlName="description"></textarea>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-placeholder>Tech Notes:</mat-placeholder>
+      <textarea matInput formControlName="techNotes"></textarea>
+    </mat-form-field>
+  </div>
+</form>

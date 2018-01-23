@@ -1,0 +1,37 @@
+.cal-event-time-field, .time-selectors .start-event-time, .time-selectors .end-event-time, .time-selectors {
+  display: flex;
+  flex-direction: row;
+}
+.cal-event-title-field > * {
+  width: 100%;
+}
+.time-selectors .end-event-time {
+  align-items: center;
+}
+.time-selectors .start-event-time label, .time-selectors .start-event-time ngb-timepicker,
+.time-selectors .end-event-time label, .time-selectors .end-event-time ngb-timepicker {
+  margin: auto;
+}
+.time-selectors {
+  justify-content: space-between;
+  width: 50%;
+}
+@media all and (max-width:768px) {
+  .time-selectors {
+    width: auto;
+  }
+}
+@media all and (max-width:520px) {
+  .time-selectors .start-event-time, .time-selectors .end-event-time, .time-selectors {
+    flex-direction: column !important;
+  }
+  .time-selectors .end-event-time input {
+    text-align: center;
+  }
+  .cal-event-title-field.event-button-container {
+    flex-direction: column;
+  }
+  .cal-event-title-field {
+    text-align: center;
+  }
+}

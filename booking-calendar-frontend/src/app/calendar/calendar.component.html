@@ -1,0 +1,52 @@
+<header>
+
+</header>
+<mat-toolbar color="primary" role="header">
+  <span>Booking Calendar</span>
+
+</mat-toolbar>
+<mat-toolbar class="calendar-header">
+    <div class="navigation-button-group">
+      <button mat-icon-button
+        (click)="showPreviousDate()">
+        <mat-icon>navigate_before</mat-icon>
+      </button>
+      <button mat-icon-button (click)=showNextDate()>
+        <mat-icon>navigate_next</mat-icon>
+      </button>
+      <span>{{ viewDate | date:'MMMM yyyy' }}</span>
+    </div>
+
+    <div class="event-button-container button-row" >
+      <button mat-raised-button type="button" (click)="changeStatus(status)" [class]="(status | lowercase)+'-button'" *ngFor="let status of statuses">
+        <span>{{status}}</span>
+      </button>
+    </div>
+    <div class="group-buttons">
+
+      <button mat-raised-button (click)="createNewGroup()" type="button" color="cyan">
+        Create new group
+      </button>
+      <button mat-raised-button [matMenuTriggerFor]="grouppedMenu" type="button" color="primary">
+          GROUPS
+        </button>
+    </div>
+</mat-toolbar>
+
+<div class="app-calendar-content">
+  <app-calendar-month-view
+    [viewDate]="viewDate"
+    [venues]="venues"
+    [events]="events"
+    [eventsGroupped]="eventsGroupped"
+    (eventTimesChanged)="eventTimesChanged($event)">
+  </app-calendar-month-view>
+
+</div>
+<div *ngIf="loaded" class="loader">
+  <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+</div>
+
+<mat-menu #grouppedMenu="matMenu">
+  <app-groupped-event-list></app-groupped-event-list>
+</mat-menu>

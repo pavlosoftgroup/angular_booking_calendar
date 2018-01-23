@@ -1,0 +1,111 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import '~ng-pick-datetime/assets/style/picker.min.css';
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500');
+
+html, body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+owl-owl-overlay {
+  z-index: 1001 !important;
+}
+button {
+  text-transform: uppercase;
+}
+
+.mat-drawer-container {
+  background: none;
+}
+.container-24, .grid-24, .container-24 .grid-24 {
+  width: 99% !important;
+}
+.hold-button, .hold-event {
+  background-color: red;
+}
+.activity-button, .activity-event {
+  background-color: rgb(0, 143, 255);
+}
+.delete-button, .delete-event {
+  background-color: black;
+}
+.confirm-button, .confirm-event {
+  background-color: rgb(0, 188, 64);
+}
+.hold-button, .delete-button, .confirm-button, .activity-button {
+  box-sizing: border-box;
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: pointer;
+  outline: 0;
+  border: none;
+  -webkit-tap-highlight-color: transparent;
+  display: inline-block;
+  white-space: nowrap;
+  text-decoration: none;
+  vertical-align: baseline;
+  text-align: center;
+  margin: 0;
+  min-width: 88px;
+  line-height: 36px;
+  padding: 0 16px;
+  border-radius: 2px;
+  transform: translate3d(0,0,0);
+  transition: background .4s cubic-bezier(.25,.8,.25,1),box-shadow 280ms cubic-bezier(.4,0,.2,1);
+}
+
+.hold-button span, .delete-button span, .confirm-button span, .activity-button span {
+  font-family: Roboto,"Helvetica Neue",sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(255,255,255,.87);
+  line-height: 36px;
+  text-align: center;
+  white-space: nowrap;
+  user-select: none;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.event-button-container {
+  display: flex;
+  width: 30%;
+  justify-content: space-between;
+  flex-direction: row;
+}
+@media all and (max-width: 768px) {
+  .calendar-header {
+    flex-direction: column !important;
+    height: auto !important;
+    align-items: flex-start !important;
+  }
+  .calendar-header {
+    margin: 5px 0 !important;
+  }
+}
+/* end of button styles */
+.m-b {
+  margin-bottom: 10px;
+}
+.m-l {
+  margin-left: 10px !important;
+}
+.m-t {
+  margin-top: 10px;
+}
+.loader {
+  position: absolute;
+  z-index: 99999;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

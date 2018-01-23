@@ -1,0 +1,49 @@
+<?php
+/**
+ * @file
+ * A description of what your module does.
+ */
+
+function booking_calendar_install() {
+    // Populate the default {node_access} record.
+    $vocabulary = taxonomy_vocabulary_machine_name_load('Venue');
+    $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+
+    foreach ($terms as $key=>$term ) {
+        $term->field_color['und'][0]['value'] = '#' . generateRandomString();
+        taxonomy_term_save($term);
+    }
+}
+
+function generateRandomString() {
+    $characters = '0123456789ABCDEF';
+    $charactersLength = strlen($characters);
+    $randomString = '';
+    for ($i = 0; $i < 6; $i++) {
+        $randomString .= $characters[rand(0, $charactersLength - 1)];
+    }
+    return $randomString;
+}
+
+function booking_calendar_update_7000() {
+    $vocabulary = taxonomy_vocabulary_machine_name_load('Venue');
+    $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+
+    foreach ($terms as $key=>$term ) {
+        $term->field_color['und'][0]['value'] = '#' . generateRandomString();
+        taxonomy_term_save($term);
+    }
+}
+/*
+$vocabulary = taxonomy_vocabulary_machine_name_load('Venue');
+    $terms = entity_load('taxonomy_term', FALSE, array('vid' => $vocabulary->vid));
+    foreach ($terms as $key=>$term ) {
+       $characters = '0123456789ABCDEF';
+        $charactersLength = strlen($characters);
+      $term->field_color['und'][0]['value'] = '#';
+    for ($i = 0; $i < 6; $i++) {
+       $term->field_color['und'][0]['value'] .= $characters[rand(0, $charactersLength - 1)];
+    }
+        taxonomy_term_save($term);
+    }
+    */

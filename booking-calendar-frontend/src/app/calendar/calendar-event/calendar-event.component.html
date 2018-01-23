@@ -1,0 +1,8 @@
+<div [class]="'cal-event ' + event.cssClass" [ngClass]="{'event-checked': isChecked}" (click)="eventClick($event)">
+  <mat-icon class="daynight-icon" *ngIf="event['isDaytime']">brightness_3</mat-icon>
+  <mat-icon class="daynight-icon" *ngIf="!event['isDaytime']">wb_sunny</mat-icon>
+  <span class="cal-event-title">{{ event.title }}</span>
+  <br/>
+  <span class="cal-event-time">{{ event.start | date:'shortTime' }} for {{ event['duration'] }} hours</span>
+  <div class="priority-circle" *ngIf="event['ticketStatus'] === 0">{{ event['priority'] || 1}}</div>
+</div>

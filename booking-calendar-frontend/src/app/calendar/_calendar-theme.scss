@@ -1,0 +1,10 @@
+@import '~@angular/material/theming';
+
+@mixin app-calendar-theme($theme) {
+
+  .mat-datepicker-content {
+    background-color: mat-color($background, card);
+    color: mat-color($foreground, text);
+  }
+
+}

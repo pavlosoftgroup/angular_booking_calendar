@@ -1,0 +1,53 @@
+<div class="cal-month-view">
+  <mwl-calendar-month-view-header
+    [days]="columnHeaders"
+    [locale]="'en-US'">
+  </mwl-calendar-month-view-header>
+  <div class="cal-days">
+    <div *ngFor="let rowIndex of view.rowOffsets">
+      <div class="cal-cell-row">
+        <div *ngFor="let day of view.days | slice : rowIndex : rowIndex + (view.totalDaysVisibleInWeek)"
+             class="cal-cell cal-day-cell"
+             [class.cal-past]="day.isPast"
+             [class.cal-today]="day.isToday"
+             [class.cal-future]="day.isFuture"
+             [class.cal-weekend]="day.isWeekend"
+             [class.cal-in-month]="day.inMonth"
+             [class.cal-out-month]="!day.inMonth"
+             [class.cal-has-events]="day.events.length > 0"
+             [ngClass]="day?.cssClass"
+             (dragEnter)="day.dragOver = true"
+             (dragLeave)="day.dragOver = false"
+             (drop)="day.dragOver = false">
+          <div class="cal-cell-top">
+            <span class="cal-day-number">{{ day.date | date:'d':'en-US' }}</span>
+          </div>
+          <div class="cal-events">
+              <div class="venue-card" *ngFor="let venue of getTodayVenues(day.events)">
+                <div [style.background-color]="venue.color" class="venue-header">
+                  <span class="venue-label">
+                    {{ venue.title }}
+                  </span>
+                </div>
+                <div>
+                  <div *ngFor="let event of day.events">
+                      <app-calendar-event
+                        *ngIf="event.venue.id === venue.id"
+                        [event]="event"
+                        [eventsGroupped]="eventsGroupped"
+                        (eventClicked)="onEventClick($event, event)">
+                      </app-calendar-event>
+                  </div>
+                </div>
+              </div>
+              <div class="add-event-btn">
+                <button mat-mat-raised-button-button color="white" type="button" (click)="addNewEvent($event, {}, day.date)">
+                  Add event
+                </button>
+              </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

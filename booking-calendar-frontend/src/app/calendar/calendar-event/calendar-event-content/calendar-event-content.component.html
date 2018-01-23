@@ -1,0 +1,66 @@
+<form [formGroup]="eventForm" (ngSubmit)="onSubmit($event)">
+  <header class="m-b">
+      <u>{{dayOfWeek}}, {{choosedDate | date:'MMMM dd'}}</u>
+  </header>
+  <div class="cal-event-title-field">
+    <mat-form-field>
+      <mat-select formControlName="venue" placeholder="Select venue">
+        <mat-option [value]="venue.id" *ngFor="let venue of venues">{{venue.title}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-placeholder>Event Name:</mat-placeholder>
+      <input matInput formControlName="title">
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-select formControlName="promoter" (selectionChange)="changePromoter($event)" placeholder="Select promoter">
+        <mat-option [value]="promoter.tid" *ngFor="let promoter of promoters">{{promoter.name}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <div class="contact-field">
+      <mat-placeholder>Contact:</mat-placeholder>
+      <input class="m-l" matInput disabled [value]="address">
+    </div>
+
+    <div class="time-selectors">
+      <div class="start-event-time">
+        <label for="start-hours-label">Start Time:&nbsp;</label>
+        <ngb-timepicker name="start-hours-label" formControlName="startHours"></ngb-timepicker>
+      </div>
+      <div class="end-event-time">
+        <label for="end-hours-label">Duration:&nbsp;</label>
+        <input matInput type="time" formControlName="duration">
+      </div>
+
+      <mat-slide-toggle
+          formControlName="isDaytime"
+          color="primary"
+      >
+        Daytime/Nighttime
+      </mat-slide-toggle>
+    </div>
+    <mat-form-field>
+      <mat-placeholder>Hold Order:</mat-placeholder>
+      <input matInput type="number" max="10" min="1" step="1" formControlName="priority">
+    </mat-form-field>
+    <div class="cal-event-title-field event-button-container button-row m-b" >
+      <button mat-raised-button type="button" [class]="(status | lowercase)+'-button'" *ngFor="let status of statuses; let i=index" (click)="changeEventStatus(i)">
+        <span>{{status}}</span>
+      </button>
+    </div>
+    <div class="cal-event-title-field m-b">
+      <div>
+        <mat-placeholder>Choosed Status:</mat-placeholder>
+        <span>{{statuses[ticketStatus]}}</span>
+      </div>
+    </div>
+    <app-calendar-event-additional-content (fileLoaded)="fileLoaded($event)" *ngIf="ticketStatus === 1" [eventForm]="eventForm"></app-calendar-event-additional-content>
+    <a mat-button [href]="link">Go to additional settings</a>
+    <div id="actions" class="cal-event-title-field">
+      <button mat-raised-button color="primary">Save</button>
+    </div>
+  </div>
+</form>

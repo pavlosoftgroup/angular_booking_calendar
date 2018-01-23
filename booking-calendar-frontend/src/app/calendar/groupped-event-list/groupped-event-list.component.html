@@ -1,0 +1,10 @@
+<div class="group-menu" mat-menu-item *ngFor="let group of groups">
+  <div>
+      {{group.title}}
+  </div>
+  <div>
+    <mat-icon matTooltip="Show groupped events" (click)="showEventsByGroup(group.gid)">event</mat-icon>
+    <mat-icon *ngIf="group.gid !== 0" matTooltip="Update group" (click)="editGroup(group.gid)">save</mat-icon>
+    <mat-icon *ngIf="group.gid !== 0" matTooltip="Remove group" (click)="removeGroup(group.gid)">close</mat-icon>
+  </div>
+</div>

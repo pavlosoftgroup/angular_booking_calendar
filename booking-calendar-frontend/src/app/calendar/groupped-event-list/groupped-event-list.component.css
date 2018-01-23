@@ -1,0 +1,10 @@
+.group-menu {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.group-menu mat-icon {
+  font-size: 20px;
+  margin: 0 !important;
+}
