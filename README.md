@@ -1,2 +1,3 @@
-# booking_calendar_int_drupal7
-# angular_booking_calendar
+# Angular Booking Calendar (Drupal7 module)
+This is not an independent module.
+It is created for a specific task and serves as an example of the integration of Drupal 7 with Angular 5.
